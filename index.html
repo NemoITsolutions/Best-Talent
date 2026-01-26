@@ -960,20 +960,24 @@ const defaultCandidates = [
             setupEventListeners();
         }
 
-        function loadData() {
-            const stored = localStorage.getItem(STORAGE_KEY);
-            if (stored) {
-                try {
-                    const data = JSON.parse(stored);
-                    settings = data.settings || { ...defaultSettings };
-                    candidates = data.candidates || [];
-                } catch (e) {
-                    candidates = [...defaultCandidates];
-                }
-            } else {
-                candidates = [...defaultCandidates];
-            }
+function loadData() {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+        try {
+            const data = JSON.parse(stored);
+            settings = data.settings || { ...defaultSettings };
+            candidates = data.candidates || [...defaultCandidates];
+        } catch (e) {
+            settings = { ...defaultSettings };
+            candidates = [...defaultCandidates];
         }
+    } else {
+        settings = { ...defaultSettings };
+        candidates = [...defaultCandidates];
+        saveData(); // 👈 ensures first load is shared
+    }
+}
+
 
         function saveData() {
             localStorage.setItem(STORAGE_KEY, JSON.stringify({ settings, candidates, lastUpdated: new Date().toISOString() }));
