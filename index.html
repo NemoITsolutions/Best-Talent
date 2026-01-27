@@ -872,12 +872,6 @@
             phone: '214-396-6721'
         };
 
-        const defaultSettings = {
-    companyName: "Nemo IT Solutions",
-    email: "imran@nemoitsolutions.com",
-    phone: "214-396-6721"
-};
-
 const defaultCandidates = [
     {
         id: 1769469634904,
@@ -1136,9 +1130,17 @@ function loadData() {
         // =====================================================
         function getGoogleDriveEmbedUrl(url) {
             if (!url) return null;
-            const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
-            return match ? `https://drive.google.com/file/d/${match[1]}/preview` : url;
+
+            // Google Docs
+            if (url.includes('docs.google.com')) {
+            return url.replace('/edit', '/preview');
         }
+
+    // Google Drive files
+    const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+    return match ? `https://drive.google.com/file/d/${match[1]}/preview` : url;
+}
+
 
         function showDocument(type) {
             if (!currentCandidate) return;
