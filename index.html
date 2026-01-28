@@ -1873,23 +1873,10 @@ window.location.href =
         function openModal(id) {
         const c = candidates.find(x => x.id === id);
           if (!c) return;
+        const pocName = c.pocName || "Imran Khan";
+        const pocPhone = c.pocPhone || settings.phone;
 
-          currentCandidate = c;
 
-          document.getElementById('modal').classList.remove('hidden');
-          showDocument('resume');
-
-              // === SET POC INFO (AFTER MODAL IS BUILT) ===
-          const pocName = c.pocName || "Imran Khan";
-          const pocPhone = c.pocPhone || settings.phone;
-
-          const pocEl = document.getElementById("pocInfo");
-          if (pocEl) {
-            pocEl.innerHTML = `
-              Please message me here, or feel free to call me<br>
-              <strong class="text-purple-400">${pocName}, ${pocPhone}</strong>
-    `      ;
-  }
 
             const tech = techConfig[c.primaryTech] || techConfig['Other'];
             const visa = visaColors[c.visa] || 'bg-gray-500';
@@ -1943,7 +1930,11 @@ window.location.href =
 
                 <div class="border-t border-white/10 pt-6">
                     <p class="text-white font-semibold mb-2">🤝 Interested in talking to candidate?</p>
-                    <p class="text-gray-400 text-sm mb-4" id="pocInfo"></p>
+                    <p class="text-gray-400 text-sm mb-4">
+                      Please message me here, or feel free to call me<br>
+                  <strong class="text-purple-400">${pocName}, ${pocPhone}</strong>
+                    </p>
+
                     
                     <div class="space-y-3">
                         <input type="text" id="vendorName" placeholder="Your Name *" class="input-modern w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 text-sm focus:outline-none">
