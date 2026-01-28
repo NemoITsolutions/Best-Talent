@@ -863,7 +863,7 @@
         // =====================================================
         // DATA
         // =====================================================
-        const STORAGE_KEY = 'benchCandidatesData_v6.0';
+        const STORAGE_KEY = 'benchCandidatesData_v6.1';
         
         const defaultSettings = {
             companyName: 'Nemo IT Solutions',
@@ -1605,7 +1605,11 @@ Rate: ${c.rate}
 ---
 Sent from Talent Portal`;
 
-            window.location.href = `mailto:${settings.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            const pocEmail = c.pocEmail || settings.email;
+
+window.location.href =
+  `mailto:${pocEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
             alert('✅ Thanks! Your email client should open now.');
         }
 
